@@ -1,5 +1,7 @@
 package com.senai.suporte.suporte.model;
 
+import java.util.Objects;
+
 public class Solicitacao {
     private Long id;
     private String nif;
@@ -72,12 +74,28 @@ public class Solicitacao {
             return false;
         }
         Solicitacao that = (Solicitacao) obj;
-        return id != null ? id.equals(that.id) : that.id == null;
+        return id != null && id.equals(that.id);
     }
 
     @Override
     public int hashCode() {
-        return id != null ? id.hashCode() : 0;
+        return Objects.hash(getClass());
+    }
+
+    public enum Tipoproblema{
+        INFORMATICA("Informática"),
+        ELETRICA("Elétrica"),
+        ZELADORIA("Zeladoria");
+
+        private final String descricao;
+
+        Tipoproblema(String descricao) {
+            this.descricao = descricao;
+        }
+
+        public String getDescricao() {
+            return descricao;
+        }
     }
 }
 
