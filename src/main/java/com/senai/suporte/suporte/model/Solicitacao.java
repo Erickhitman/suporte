@@ -1,15 +1,25 @@
 package com.senai.suporte.suporte.model;
 
+import jakarta.persistence.*;
 import java.util.Objects;
 
+@Entity
+@Table(name = "solicitacao")
 public class Solicitacao {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String nif;
     private String nomeSolicitante;
     private String numeroSala;
     private String codigoPatrimonio;
     private String descricaoProblema;
-    //private StatusSolicitacao  status = new StatusSolicitacao.PENDENTE;
+    
+    @Enumerated(EnumType.STRING)
+    private StatusSolicitacao status;
+    
+    @Enumerated(EnumType.STRING)
+    private Tipoproblema tipoProblema;
 
     //Construtor
     public Solicitacao() {
@@ -65,6 +75,22 @@ public class Solicitacao {
         this.descricaoProblema = descricaoProblema;
     }
 
+    public StatusSolicitacao getStatus() {
+        return status;
+    }
+
+    public void setStatus(StatusSolicitacao status) {
+        this.status = status;
+    }
+
+    public Tipoproblema getTipoProblema() {
+        return tipoProblema;
+    }
+
+    public void setTipoProblema(Tipoproblema tipoProblema) {
+        this.tipoProblema = tipoProblema;
+    }
+
     @Override
     public boolean equals(Object obj) {
         if (this == obj) {
@@ -80,6 +106,22 @@ public class Solicitacao {
     @Override
     public int hashCode() {
         return Objects.hash(getClass());
+    }
+
+    public enum StatusSolicitacao {
+        PENDENTE("Pendente"),
+        EM_PROGRESSO("Em Progresso"),
+        CONCLUIDA("Concluída");
+
+        private final String descricao;
+
+        StatusSolicitacao(String descricao) {
+            this.descricao = descricao;
+        }
+
+        public String getDescricao() {
+            return descricao;
+        }
     }
 
     public enum Tipoproblema{

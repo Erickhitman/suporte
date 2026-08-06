@@ -1,8 +1,13 @@
 package com.senai.suporte.suporte.model;
 
+import jakarta.persistence.*;
 import java.util.Objects;
 
+@Entity
+@Table(name = "tecnico")
 public class Tecnico {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String nome;
     private String email;
