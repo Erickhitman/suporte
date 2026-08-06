@@ -82,4 +82,16 @@ public class SolicitacaoService {
 
         return solicitacaoRepository.save(existente);
     }
+
+    @Transactional
+    public Solicitacao alterarStatus(Long id, StatusSolicitacao novoStatus) {
+        Solicitacao solicitacao = buscarporId(id);
+        solicitacao.setStatus(novoStatus);
+        return solicitacaoRepository.save(solicitacao);
+    }
+    @Transactional
+    public void excluir(Long id) {
+        Solicitacao solicitacao = buscarporId(id);
+        solicitacaoRepository.delete(solicitacao);
+    }
 }
