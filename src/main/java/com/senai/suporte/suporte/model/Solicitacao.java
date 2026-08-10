@@ -110,7 +110,7 @@ public class Solicitacao {
 
     public enum StatusSolicitacao {
         PENDENTE("Pendente"),
-        EM_PROGRESSO("Em Progresso"),
+        EM_ANDAMENTO("Em Andamento"),
         CONCLUIDA("Concluída");
 
         private final String descricao;
