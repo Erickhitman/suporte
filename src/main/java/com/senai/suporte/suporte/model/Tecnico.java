@@ -1,6 +1,11 @@
 package com.senai.suporte.suporte.model;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
+
 import java.util.Objects;
 
 @Entity
@@ -9,8 +14,20 @@ public class Tecnico {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @NotBlank(message = "O nome do técnico é obrigatório")
+    @Size(min=3, max=100, message = "O nome do técnico deve ter entre 3 e 100 caracteres")
+    @Column(nullable = false)
     private String nome;
+
+    @NotNull(message = "O email do técnico é obrigatório")
+    @Email(message = "O email do técnico deve ser válido")
+    @Column(nullable = false, unique = true)
     private String email;
+
+    @NotNull(message = "A senha do técnico é obrigatória")
+    @Size(min = 6, max = 255, message = "A senha do técnico deve ter entre 6 e 255 caracteres")
+    @Column(nullable = false)
     private String senha;
 
     public Tecnico() {

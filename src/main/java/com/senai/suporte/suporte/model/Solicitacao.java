@@ -1,6 +1,9 @@
 package com.senai.suporte.suporte.model;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
+
 import java.util.Objects;
 
 @Entity
@@ -9,15 +12,33 @@ public class Solicitacao {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @NotBlank(message = "O NIF é obrigatório")
+    @Column(nullable = false)
     private String nif;
+    @NotBlank(message = "O nome do solicitante é obrigatório")
+    @Size(min = 3, max = 100, message = "O nome deve ter entre 3 e 100 caracteres")
+    @Column(nullable = false)
     private String nomeSolicitante;
+    @NotBlank(message = "O número da sala é obrigatório")
+    @Column(nullable = false)
     private String numeroSala;
+
+    @NotBlank(message = "O código do patrimônio é obrigatório")
+    @Column(nullable = false)
     private String codigoPatrimonio;
+
+    @NotBlank(message = "A descrição do problema é obrigatória")
+    @Column(nullable = true)
     private String descricaoProblema;
-    
+
+    @NotBlank(message = "O status da solicitação é obrigatório")
+    @Column(nullable = false, length = 20)
     @Enumerated(EnumType.STRING)
     private StatusSolicitacao status;
-    
+
+
+    @NotBlank(message = "O tipo do problema é obrigatório")
+    @Column(nullable = false, length = 20)
     @Enumerated(EnumType.STRING)
     private Tipoproblema tipoProblema;
 

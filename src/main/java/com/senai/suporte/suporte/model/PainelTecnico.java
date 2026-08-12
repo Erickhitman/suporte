@@ -1,11 +1,25 @@
 package com.senai.suporte.suporte.model;
 
+import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
+
 import java.util.Objects;
 
+@Entity
+@Table(name = "painel_tecnico")
 public class PainelTecnico {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @OneToOne
+    @JoinColumn(name = "solicitacao_id", nullable = false)
     private Solicitacao solicitacao;
+
+    @NotBlank(message = "O técnico responsável é obrigatório")
+    @Column(nullable = false, length = 100)
     private String tecnicoResponsavel;
+
+    @Column(columnDefinition = "TEXT")
     private String observacoes;
 
     public PainelTecnico() {
